@@ -2,8 +2,8 @@
   .search-form
     %h4 Find your near events
     = form_tag search_events_path, method: :get do |f|
-      %p.form-goup= text_field_tag :search, nil, placeholder: "steaks, burgers", class: "form-control"
-      %p.form-goup= text_field_tag :location,nil, placeholder: 'denver, miami, e.t.c', class: "form-control"
+      %p.form-goup= text_field_tag :search, nil, placeholder: "weddings, birthday parties, church events", class: "form-control"
+      %p.form-goup= text_field_tag :location,nil, placeholder: 'hillbrow, newtown, primrose e.t.c', class: "form-control"
       %p.form-goup= select_tag :category, options_from_collection_for_select(Category.all, :id, :name), class: "form-control"
       %p= submit_tag 'Search', class: "btn btn-warning"
 
