@@ -31,7 +31,7 @@
         = @event.place.country
         = @event.place.zipcode
   .col-md-12
-    %p= @event.description
+    %p= sanitize @event.description
 
 = link_to 'Edit', edit_business_event_path(@event)
 \|
