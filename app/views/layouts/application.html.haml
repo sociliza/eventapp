@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title= content_for?(:title) ? yield(:title) : 'Sociliza'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Sociliza'}"}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    :javascript
+      addEventListener("load", function() { 
+        setTimeout(hideURLbar, 0); }, false); 
+        function hideURLbar(){ window.scrollTo(0,1); 
+        } 
+  %body{ class: "sticky-header left-side-collapsed", onload: "initMap()"}
+    %header
+      = render 'layouts/navigation'
+    %main{:role => "main"}
+      = render 'layouts/messages'
+      .row
+        .col-lg-8.col-md-8
+          = yield
+        .col-lg-4.col-md-4
+          = render 'layouts/sidebar'

@@ -1,0 +1,11 @@
+.row
+  - @plans.each do |plan|
+    .col-sm-4
+      .list-group
+        = link_to " ", class: "list-group-item active" do
+          = "#{plan.name} - #{number_to_currency(plan.price)} / Month"
+        = link_to "#{plan.events} Events", "", class: "list-group-item"
+        = link_to "#{plan.tables} tables / Events", "", class: "list-group-item"
+        = link_to "#{plan.storage} GB storage", "", class: "list-group-item"
+        = link_to new_business_registration_path(:plan_id => plan.id), class: "list-group-item" do 
+          %button.btn.btn-success Sign Up

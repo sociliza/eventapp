@@ -1,0 +1,30 @@
+<%= controller_name %>
+  <%= params.inspect %>
+<%  %>
+
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <% if user_signed_in? %>
+      <%= f.input :company_name, required: true, autofocus: true %>
+      <%= f.input :plan_id, as: :hidden, value: params[:plan_id] %>
+    <% else %>
+        <%= f.input :name, required: true, autofocus: true %>
+    <% end %>
+    <%= f.input :email, required: true %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <%= f.input :password_confirmation, required: true %>
+  </div>
+  <% if user_signed_in? %>
+    <h3>Plan Selected: <%= plan_name(params[:plan_id]) %></h3>
+  <% end %>
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

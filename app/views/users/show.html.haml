@@ -1,0 +1,23 @@
+= render 'profile'
+
+.profile-info.grid
+  .profile-img
+  .profile-bottom
+    %ul
+      %li= image_tag "img1.jpg", alt: "", width: 60
+      %li= link_to "1 hour ago"
+      %li= link_to "", "", class: "glyphicon glyphicon-heart"
+      %li= link_to "", " ", class: "glyphicon glyphicon-comment active"
+
+.clearfix
+
+%p
+  %b Name:
+  = @user.name
+%p
+  %b Slug:
+  = @user.slug
+
+= link_to 'Edit', edit_user_path(@user)
+\|
+= link_to 'Back', users_path

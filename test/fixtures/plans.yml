@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  events: 1
+  price: 1.5
+  tables: 1
+  storage: 1
+
+two:
+  name: MyString
+  events: 1
+  price: 1.5
+  tables: 1
+  storage: 1

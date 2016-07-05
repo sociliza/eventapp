@@ -1,0 +1,42 @@
+
+%h2
+  = @event.title
+
+%p.thumbnail
+  - if @event.image.present?
+    = image_tag(@event.image_url)
+.row
+  .col-md-6
+    %h3 Date
+    %blockquote
+      %p
+        %b Start: 
+        = @event.start_date
+      %p
+        %b End: 
+        = @event.end_date
+      %p
+        %b Organizer:
+        = @event.business
+
+  .col-md-6
+    %h3 Place
+    %blockquote
+      %p
+        = @event.place.street 
+      %p
+        = "#{@event.place.city}, #{@event.place.state}"
+      %p 
+        %Country
+        = @event.place.country
+        = @event.place.zipcode
+  .col-md-12
+    %p= @event.description
+
+= link_to 'Edit', edit_business_event_path(@event)
+\|
+= link_to 'Back', events_path
+
+%p
+  %b Business:
+  = @event.business

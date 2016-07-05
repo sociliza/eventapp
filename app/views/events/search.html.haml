@@ -1,0 +1,9 @@
+%section
+  %section.col-lg-12.col-md-12
+    %h1 Events Next You
+
+    - if business_signed_in?
+      = link_to 'Create A New Event', new_business_event_path(current_business)
+
+  %section.col-lg-12.col-md-12
+    = render @events
