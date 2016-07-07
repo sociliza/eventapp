@@ -20,6 +20,10 @@ class User < ApplicationRecord
   has_many :reverve_subscriptions, foreign_key: :leader_id, class_name: "Subscription", dependent: :destroy
   has_many :followers, through: :reverve_subscriptions
 
+  has_many :sent_messages, class_name: "Conversation", foreign_key: "sender_id"
+  has_many :received_messages, class_name: "Conversation", foreign_key: "recipient_id"
+  has_many :messages
+
 
   def following?(leader)
     leaders.include? leader
