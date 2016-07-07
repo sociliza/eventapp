@@ -1,0 +1,17 @@
+= simple_form_for([current_user, current_user.profile]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :gender
+    = f.input :date_of_birth
+    = f.input :contact_number
+    = f.input :interest
+    = f.input :favourite_quote
+    = f.input :about_me
+    = f.input :image
+    = f.input :image_cache, as: :hidden
+
+  .form-actions
+    = f.button :submit, 'Update'

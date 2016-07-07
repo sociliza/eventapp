@@ -19,6 +19,8 @@ class Event < ApplicationRecord
   has_one :place, as: :placeable
   accepts_nested_attributes_for :place, reject_if: :all_blank
 
+  has_many :comments
+
   def self.search(params)
     events = Event.where(id: params[:category].to_i)
     events = events.where("title like ? or description like ?", "%#{params[:search]}%", "%#{params[:search]}%")

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:new, :create, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
 
   # GET /users
   # GET /users.json
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user = @user.place_build
   end
 
   # GET /users/1/edit
@@ -61,6 +63,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    @user = User.find(params[:id])
+    current_user.follow!(@user)
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
+    end
+  end
+
+  def unfollow
+    @user = User.find(params[:id])
+    current_user.unfollow!(@user)
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
+    end
+  end
+
+  def following
+    @users = @user.leaders.all
+    render :index
+  end
+
+  def followers
+    @users = @user.followers.all
+    render :index
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -69,6 +99,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :slug)
+      params.require(:user).permit(:name, :slug, place_attributes: [:title, :street, :city, :state, :country, :zipcode])
     end
 end

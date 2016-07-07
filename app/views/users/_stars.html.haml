@@ -1,0 +1,17 @@
+- if @user ||= current_user
+  .stars
+    = link_to following_user_path() do 
+      %strong#following.stat
+        = @user.leaders.count
+      following
+    = link_to followers_user_path() do 
+      %strong#followers.stat
+        = @user.followers.count
+      followers 
+
+- if current_user != @user
+  #follow_form
+    - unless current_user.following?(@user)
+      = render 'users/follow'
+    - else
+      = render 'users/unfollow'

@@ -1,6 +1,7 @@
 // import the CSS framework
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap/theme";
 @import "font-awesome";
 
 
@@ -81,4 +82,45 @@ section {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-xs;
+}
+
+
+.comment {
+  margin-top: 15px;
+}
+.comment:first-child {
+  margin-top: 10px;
+}
+.comment,
+.comment-body {
+  overflow: hidden;
+  zoom: 1;
+}
+.comment-body {
+  @extend .col-sm-9;
+  margin: 0;
+  padding: 0;
+}
+.comment-object {
+  display: block;
+}
+.comment-object.img-thumbnail {
+  max-width: none;
+}
+.comment-right,
+.comment > .pull-right {
+  padding-left: 10px;
+}
+.comment-left,
+.comment > .pull-left {
+  @extend .col-sm-3;
+}
+.comment-left,
+.comment-right,
+.comment-body {
+  display: table-cell;
+  vertical-align: top;
+}
+.comment-middle {
+  vertical-align: middle;
 }

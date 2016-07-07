@@ -1,22 +1,27 @@
 %article.col-md-4
-  = image_tag(event.image_url, class: "img-rounded")
-
-%article.col-md-8
-  %h3
-    = link_to "#{event.title}", event
-    %small
-      by
-      = link_to "#{event.business}", event.business
+  %h5
+    = link_to truncate(event.title, length: 50), event
+  - if event.image.present?
+    = image_tag(event.image_url, class: "img-rounded")
+  - else
+    = image_tag("pic1.jpg", class: "img-rounded")
   %p
+    by
+    = link_to "#{event.business}", event.business
+  %p.small
+    %strong
+      Date:
     = fa_icon("clock") + event.start_date.strftime("%v")
     to
     = event.end_date.strftime("%v")
-  %p
-    = fa_icon("clock") + event.start_date.strftime("%I:%M %P")
+  %p.small
+    %strong
+      Time:
+    = fa_icon("fa-clock") + event.start_date.strftime("%I:%M %P")
     to
     = event.end_date.strftime("%I:%M %P")
   %blockquote
-    = "#{truncate(event.description)}"
-    %small= link_to "read more", event
-  %p.small
-    = "#{event.place.street}, #{event.place.city}, #{event.place.state}, #{event.place.country}, #{event.place.zipcode}"
+    .small= event.place.street
+    .small= "#{event.place.city}" 
+    .small= "#{event.place.state}"
+    .small= "#{event.place.country}"

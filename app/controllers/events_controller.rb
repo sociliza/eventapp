@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    #user_ids = current_user.timeline_user_ids
     #show by location
     #visitor_latitude = request.location.latitude 
     #visitor_longitude = request.location.latitude
@@ -24,6 +25,8 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event_place = @event.build_place
+
+    @can_moderate = (current_business == @event.business)
   end
 
   # GET /events/1/edit

@@ -1,0 +1,15 @@
+.ui.segment
+  %h3 ChatBox
+
+  .ui.list
+    %ul.list-group
+      - @conversations.each do |conversation|
+        - if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id 
+          - if conversation.sender_id == current_user.id
+            - recipient = User.find(conversation.recipient_id)
+          - else
+            - recipient = User.find(conversation.sender_id)
+          %li.list-group-item
+            = link_to recipient.name, conversation_messages_path(conversation)
+            - conversation.messages.order("created_at DESC").limit(1).each do |message|
+              = message.body

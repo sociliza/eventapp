@@ -12,6 +12,43 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.raty
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require easyResponsiveTabs.js
 //= require_tree .
+
+$(document).ready(function () {
+  $('#horizontalTab').easyResponsiveTabs({
+    type: 'default', //Types: default, vertical, accordion
+    width: 'auto', //auto or any width like 600px
+    fit: true,   // 100% fit in a container
+    closed: 'accordion', // Start closed if in accordion view
+    activate: function(event) { // Callback function if tab is switched
+      var $tab = $(this);
+      var $info = $('#tabInfo');
+      var $name = $('span', $info);
+      $name.text($tab.text());
+      $info.show();
+    }
+  });
+
+  $('#verticalTab').easyResponsiveTabs({
+    type: 'vertical',
+    width: 'auto',
+    fit: true
+  });
+});
+
+$('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+
+$('#star-rating').raty({
+    path: '/assets',
+    scoreName: 'review[rating]'
+});

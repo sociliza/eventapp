@@ -5,6 +5,7 @@
     = f.input :title
     = f.input :start_date, as: :datetime
     = f.input :end_date, as: :datetime
+    = f.association :category
     = f.input :description
 
     = f.simple_fields_for :place do |p|

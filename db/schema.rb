@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703194125) do
+ActiveRecord::Schema.define(version: 20160706200943) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "company_name"
@@ -48,8 +48,29 @@ ActiveRecord::Schema.define(version: 20160703194125) do
     t.index ["slug"], name: "index_categories_on_slug"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text     "body"
+    t.string   "rating"
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_comments_on_event_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer  "business_id"
+    t.integer  "category_id"
     t.string   "title"
     t.datetime "start_date"
     t.datetime "end_date"
@@ -59,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160703194125) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["business_id"], name: "index_events_on_business_id"
+    t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["slug"], name: "index_events_on_slug"
   end
 
@@ -72,6 +94,17 @@ ActiveRecord::Schema.define(version: 20160703194125) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.boolean  "read"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -103,6 +136,13 @@ ActiveRecord::Schema.define(version: 20160703194125) do
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "gender"
+    t.date     "date_of_birth"
+    t.string   "contact_number"
+    t.text     "interest"
+    t.text     "favourite_quote"
+    t.text     "about_me"
+    t.string   "image"
     t.string   "profileable_type"
     t.integer  "profileable_id"
     t.datetime "created_at",       null: false
@@ -118,6 +158,15 @@ ActiveRecord::Schema.define(version: 20160703194125) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "leader_id"
+    t.integer  "follower_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["follower_id"], name: "index_subscriptions_on_follower_id"
+    t.index ["leader_id"], name: "index_subscriptions_on_leader_id"
   end
 
   create_table "transactions", force: :cascade do |t|

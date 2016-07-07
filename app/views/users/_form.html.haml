@@ -2,8 +2,18 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :slug
+    - if @user_update
+      = f.input :name
+      = f.input :slug
+    - else
+
+      = f.simple_fields_for :place do |p|
+        = p.input :title
+        = p.input :street
+        = p.input :city
+        = p.input :state
+        = p.input :country
+        = p.input :zipcode
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, "Update"

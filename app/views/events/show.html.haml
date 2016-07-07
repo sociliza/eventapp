@@ -37,6 +37,12 @@
 \|
 = link_to 'Back', events_path
 
-%p
-  %b Business:
-  = @event.business
+
+.comments_form
+  = render 'comments/form'
+
+.comments_list
+  - if @event.comments.blank?
+    %h3 No comments just yet, would you like to add the first!
+  - else
+    = render @event.comments.includes(:user)

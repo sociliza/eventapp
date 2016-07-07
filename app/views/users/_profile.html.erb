@@ -1,21 +1,149 @@
-<div class="profile-info grid">
-						<div class="profile-img">
-						</div>
-						<div class="profile-bottom">
-							<ul>
-								<li>
-									<%= image_tag("img1.jpg", alt: "") %>
-								</li>
-								<li>
-									<a href="#">1 hour ago</a>
-								</li>
-								<li>
-									<a href="#"><span class="glyphicon glyphicon-heart"></span></a>
-								</li>
-								<li>
-									<a href="#" class="active"><span class="glyphicon glyphicon-comment"></span></a>
-								</li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-					</div>
+<script>
+
+$(document).ready(function () {
+  $('#horizontalTab').easyResponsiveTabs({
+    type: 'default', //Types: default, vertical, accordion
+    width: 'auto', //auto or any width like 600px
+    fit: true,   // 100% fit in a container
+    closed: 'accordion', // Start closed if in accordion view
+    activate: function(event) { // Callback function if tab is switched
+      var $tab = $(this);
+      var $info = $('#tabInfo');
+      var $name = $('span', $info);
+      $name.text($tab.text());
+      $info.show();
+    }
+  });
+
+  $('#verticalTab').easyResponsiveTabs({
+    type: 'vertical',
+    width: 'auto',
+    fit: true
+  });
+});
+</script>
+
+<h1><%= "##{@user.name} Profile" %></h1>
+<div class="content">
+  <div class="sap_tabs">
+  <div id="horizontalTab" ">
+    <div class="portfolio-grid">
+    <div class="col-md-4">
+      <ul class="resp-tabs-list">
+      <% - if @user.profile.image.present? %>
+        <%= image_tag(@user.profile.image_url)%>
+      <% else %>
+        <%= image_tag("pic1.jpg", alt: "" )%>
+      <% end %>
+      <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span><%= link_to "Basic Details", "" %></span></li>
+      <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Interests</span></li>
+      <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Work & Play</span></li>
+      <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span>Social Life</span></li>
+      
+      <li class="resp-tab-item" aria-controls="tab_item-4" role="tab"><span>Settings</span></li>
+      <div class="clear"></div>
+      </ul>   
+    </div>
+    <div class="col-md-8">
+      <div class="resp-tabs-container">
+
+      <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+        <div class="profile-content">
+        
+        
+        <p><%= render 'users/stars' %></p>
+        <% if current_user != @user %>
+          <p><%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: :pos %></p>
+        <% end %>
+        <h3>First Name</h3>  
+        <p><%= @user.profile.first_name %></p>
+        <h3>Last Name</h3>
+        <p><%= @user.profile.last_name %></p>
+        <h3>Date Of Birth</h3>
+        <p><%= @user.profile.date_of_birth %></p>
+        <h3>Email</h3>
+        <p><%= @user.email %></p>
+        <h3>Contact Number</h3> 
+        <p><%= @user.profile.contact_number %></p>
+        <h3>Gender</h3> 
+        <p><%= @user.profile.gender %></p>
+        </div>
+        <div class="update">
+          <%= link_to "Update", edit_user_profile_path(@user) %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+        <div class="interests">
+        <h3>Interested in</h3>
+        <div class="single-bottom">
+          <h3>Interest</h3>
+          <p><%= @user.profile.interest %></p>
+          <h3>Favourite Quote</h3>
+          <p><%= @user.profile.favourite_quote %></p>
+          <h3>About You</h3>
+          <p><%= @user.profile.about_me %></p>
+        </div>
+        </div>
+        <div class="update">
+          <a href="#">Update</a>
+        </div>
+        <div class="clear"></div>                     
+      </div>
+
+      <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+        <div class="work-play">
+        <h3>Location</h3>
+
+        <h3>Say Something about you home town</h3>
+        <p><%= @user.place.title %></p>
+        <h3>Street</h3>
+        <p><%= @user.place.street %>
+        <h3>City</h3>
+        <p><%= @user.place.city %>
+        <h3>State/Province</h3>
+        <p><%= @user.place.state %>
+        <h3>Country</h3>
+        <p><%= @user.place.country %></p>
+        <h3>Zipcode</h3>
+        <p><%= @user.place.zipcode %></p>
+
+        <div class="update">
+          <%= link_to "Update", edit_user_path(@user) %>
+        </div>
+        <div class="clear"></div>
+        </div>
+      </div>
+
+      <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
+        <div class="social-life">
+        <h3>Social Profile</h3>
+        <h4>We can automatically retrieve most facebook, twitter and linkedin profiles based on email address..</h4>  
+          <p>Would you like to import social profiles now??  You can change this later.</p>
+        <a href="#">Not Now</a>
+        <a href="#">Yes</a>
+        </div>
+      </div>
+
+                    
+      <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+        <div class="work-play">
+        <h3>Settings</h3>
+        <h4>Profile Name</h4>
+
+        <div class="update">
+          <a href="#">Update</a>
+        </div>
+          <div class="clear"></div>
+        </div>                  
+        </div>  
+      </div>
+
+      <div class="clear"></div>
+    </div>
+  
+    </div>
+  </div>
+  </div>
+</div>
