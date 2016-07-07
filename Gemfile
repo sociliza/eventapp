@@ -18,6 +18,7 @@ gem 'cancan'
 gem 'rolify'
 gem 'font-awesome-rails'
 #gem 'gmap4rails'
+gem 'faker'
 
 # Added postgres and it production only
 gem 'pg', group: :production
