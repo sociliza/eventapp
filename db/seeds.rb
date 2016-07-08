@@ -28,7 +28,7 @@ User.create!(name:  "Phumzani",
              password_confirmation: "majorars"
              )
 
-99.times do |n|
+20.times do |n|
   name  = Faker::Name.name
   fname = Faker::Name.first_name
   lname = Faker::Name.last_name
@@ -71,7 +71,7 @@ User.create!(name:  "Phumzani",
 end
 
 
-50.times do |n|
+20.times do |n|
   if n > 9
     n = 0
   end
@@ -84,8 +84,8 @@ end
   image = Faker::Avatar.image
   t = Faker::Lorem.sentences
   d = Faker::Lorem.sentences(30)
-  s = Faker::Date.between(Date.today, 1.year.from_now)
-  e = Faker::Date.between(s, 1.year.from_now)
+  s = Faker::Date.between(1.year.from_now, Date.today)
+  e = Faker::Date.between(1.year.from_now, s)
   c = Category.find(n+1)
     street = Faker::Address.street_address
   city = Faker::Address.city
@@ -107,3 +107,5 @@ end
               zipcode: zipcode,
               )
 end
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

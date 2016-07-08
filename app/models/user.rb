@@ -24,6 +24,10 @@ class User < ApplicationRecord
   has_many :received_messages, class_name: "Conversation", foreign_key: "recipient_id"
   has_many :messages
 
+  # invite invitations
+  has_many :invites
+  has_many :events_as_guest, through: :invites, source: :event
+
 
   def following?(leader)
     leaders.include? leader
@@ -48,5 +52,27 @@ class User < ApplicationRecord
   def build_stuff
     self.create_profile
     self.create_place
+  end
+
+  # Event Methods
+
+  def upcoming_events
+    self.events_as_guest.upcoming
+  end
+
+  def previous_events
+    self.events_as_guest.past
+  end
+
+  def attending?(event)
+    event.guests.include?(self)
+  end
+
+  def attend!(event)
+    self.invites.create!(attended_event_id: event.id)
+  end
+
+  def cancel!(event)
+    self.invites.find_by(attended_event_id: event.id).destroy
   end
 end

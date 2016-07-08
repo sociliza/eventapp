@@ -132,6 +132,29 @@ $(document).ready(function () {
         <h3>Settings</h3>
         <h4>Profile Name</h4>
 
+<div class="row">
+  <%= render "shared/user_sidebar" %>
+  <div class="col-md-4">
+    <h3>Hosted events (<%#= @events_as_host.count %>)</h3>
+    <ol class="events">
+      <%# if @events_as_host.none? %>
+        <li>Currently hosting no events.</li>
+      <%# end %>
+      <%#= render @events_as_host %>
+    </ol>
+  </div>
+  <div class="col-md-4">
+    <h3>Attending events (<%= @attending_events.count %>)</h3>
+    <ol class="events">
+      <% if @attending_events.none? %>
+        <li>Currently attending no events.</li>
+      <% end %>
+      <%= render @attending_events %>
+    </ol>
+  </div>
+</div>
+
+
         <div class="update">
           <a href="#">Update</a>
         </div>

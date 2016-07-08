@@ -1,0 +1,13 @@
+<% provide(:title, "Invite users") %>
+<h1>Invite Users</h1>
+
+<%= form_tag [@event, @event.invites.new] do %>
+  <ul class="users">
+    <% @users.each do |user| %>
+      <%= hidden_field_tag :event_id, @event %>
+      <%= render partial: "shared/user_invite", locals: { user: user } %>
+    <% end %>
+  </ul>
+
+  <%= submit_tag "Send invites", class: "btn btn-primary" %>
+<% end %>

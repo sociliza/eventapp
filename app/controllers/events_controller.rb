@@ -13,7 +13,15 @@ class EventsController < ApplicationController
     #visitor_longitude = request.location.latitude
     #@events = Event.near([visitor_latitude, visitor_longitude], 20)
 
-    @events = Event.all
+    if params[:current_events]
+      @events = Event.current_events.all
+    elsif params[:upcoming]
+      @events = Event.upcoming.all
+    elsif params[:past]
+      @events = Event.past.all
+    else
+      @events = Event.all
+    end
   end
 
   # GET /events/1

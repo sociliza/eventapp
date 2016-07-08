@@ -5,4 +5,5 @@
   %li= link_to "Profile", user_path(current_user)
   %li= link_to "Party Rockers", users_path
   %li= link_to "Chatbox", conversations_path
+  %li= link_to "InvitesBox", user_invites_path(current_user) 
   %li= link_to "Sign Out", destroy_user_session_path, method: :delete

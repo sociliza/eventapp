@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    #@events_as_host = @user.events_as_host
+    @attending_events = @user.events_as_guest.where('invites.status' => 'yes')
   end
 
   # GET /users/new

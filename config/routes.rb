@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  resources :invites
   resources :conversations
   resources :conversations do 
     resources :messages
@@ -17,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resource :profile
+    resources :invites
     member do
       post :follow
       delete :unfollow
@@ -27,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :events do 
     resources :comments
+    resources :invites
     collection do
       get :search
     end

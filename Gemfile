@@ -19,7 +19,20 @@ gem 'rolify'
 gem 'font-awesome-rails'
 #gem 'gmap4rails'
 gem 'faker'
+gem 'sitemap'
 
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'rspec-rails', '>= 3.5.0.beta1'
+gem 'ransack',    github: 'activerecord-hackery/ransack'
+gem 'formtastic', github: 'justinfrench/formtastic'
+gem 'draper',     github: 'audionerd/draper', branch: 'rails5'
+# To fix a Draper deprecation error
+gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
+# Optional -- only if you already include these gems
+gem 'rack-mini-profiler',          github: 'MiniProfiler/rack-mini-profiler'
+gem 'database_cleaner',            github: 'pschambacher/database_cleaner', branch: 'rails5.0'
+
+gem 'activeadmin', '~> 1.0.0.pre4'
 # Added postgres and it production only
 gem 'pg', group: :production
 gem 'rails_12factor'
